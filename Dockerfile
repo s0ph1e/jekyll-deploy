@@ -1,4 +1,4 @@
-FROM ruby:latest
+FROM ruby:2.5
 LABEL "com.github.actions.name"="Jekyll Deploy"
 LABEL "com.github.actions.description"="Builds and deploys a jekyll page to GitHub pages"
 LABEL "com.github.actions.icon"="chevrons-right"
