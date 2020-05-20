@@ -23,10 +23,11 @@ File.open('.nojekyll', 'w') { |f| f.puts 'Skip Jekyll' }
 
 system_or_fail('git', 'init', '.')
 FileUtils.cp('../.git/config', '.git/config')
+FileUtils.cp('../CNAME', 'CNAME')
 system_or_fail('git', 'config', 'user.name', ENV['GITHUB_ACTOR'])
 system_or_fail('git', 'config', 'user.email', "#{ENV['GITHUB_ACTOR']}@users.noreply.github.com")
-system_or_fail('git', 'pull', '--no-tags', '--no-recurse-submodules', '--depth=1', 'origin', '+gh-pages:refs/remotes/origin/gh-pages')
-#system_or_fail('git', 'reset', '--soft', 'origin/gh-pages')
+system_or_fail('git', 'fetch', '--no-tags', '--no-recurse-submodules', '--depth=1', 'origin', '+gh-pages:refs/remotes/origin/gh-pages')
+system_or_fail('git', 'reset', '--soft', 'origin/gh-pages')
 system_or_fail('git', 'add', '-A', '.')
 system_or_fail('git', 'commit', '-m', 'Update github pages')
 system_or_fail('git', 'push', 'origin', 'HEAD:gh-pages')
